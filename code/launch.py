@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import QtCore, uic
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QMessageBox, QTableWidgetItem, QVBoxLayout
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 import feedparser
 import wget
 from datetime import datetime as dt
@@ -38,10 +39,8 @@ class Application(QMainWindow):
 
     # sends notifications to notify user
     def send_notifications(self):
+        pass
         # analyzed device sends JSON format file
-        analyze = True
-        name = "demo_notif_from_device.json"
-        f = json.decoder
 
     # outside buttons
     # shows all devices
@@ -87,13 +86,14 @@ class Application(QMainWindow):
         self.setWindowTitle("Наличие обновлений")
         self.setWindowIcon(QIcon("icon.ico"))
 
-        global main_date
+        """global main_date
         update = False
         date = feedparser.parse("https://www.cve.org/AllResources/CveServices#cve-json-5").updated
         if date != main_date:
             update = True
-            main_date = date
-        
+            main_date = date"""
+
+        update = False
         if update:
             upd_message = QMessageBox()
             upd_message.setWindowTitle("Завершено")
@@ -106,7 +106,7 @@ class Application(QMainWindow):
             answ = upd_message.exec_()  # 16384 => yes / 65536 => no
             # downloading new database for last and current years
             if answ == 16384:
-                url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
+                """url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
                 wget.download(url)  # => cvelistV5-main.zip
                 with zp("cvelistV5-main.zip") as zf:
                     zf.extractall("./")
@@ -122,7 +122,7 @@ class Application(QMainWindow):
                             for file in os.listdir(f"./cvelistV5-main/cves/{by_year}/{folders}"):
                                 shutil.copy(f"./cvelistV5-main/cves/{by_year}/{folders}/{file}", "database")
                     else:
-                        continue
+                        continue"""
                 uic.loadUi("check_for_updates_new.ui", self)
                 self.setWindowTitle("Наличие обновлений")
                 self.setWindowIcon(QIcon("icon.ico"))
@@ -143,12 +143,14 @@ class Application(QMainWindow):
             upd_message.addButton("ОК", QMessageBox.YesRole)
             upd_message.exec_()
             uic.loadUi("check_for_updates_new.ui", self)
+            self.setWindowTitle("Наличие обновлений")
+            self.setWindowIcon(QIcon("icon.ico"))
             self.btn_back.clicked.connect(self.menu)
 
     def run_btn_scan_net(self):
         # gets IP address
         # IP range of the network from 192.168.0.0 to 192.168.0.255
-        ip = socket.gethostbyname(socket.gethostname())
+        """ip = socket.gethostbyname(socket.gethostname())
 
         # scans and founds all devices in network
         hosts = []
@@ -172,21 +174,43 @@ class Application(QMainWindow):
             item_adr = QTableWidgetItem(address)
             self.table_ad.setItem(i, 0, item_name)
             self.table_ad.setItem(i, 1, item_mac)
-            self.table_ad.setItem(i, 2, item_adr)
+            self.table_ad.setItem(i, 2, item_adr)"""
 
     def run_btn_check_device(self):
         pass
 
     def run_btn_app_doc(self):
-        uic.loadUi("app_doc.ui", self)
-        self.setWindowTitle("Руководство по Использованию")
+        w = uic.loadUi("docs.ui", self)
+        self.setWindowTitle("Руководство по Эксплуатации")
         self.setWindowIcon(QIcon("icon.ico"))
+
+        url_app_doc = "https://github.com/shersh-is/IoT-SecurityPoint/blob/main/docs/application_doc.md"
+        self.browser = QWebEngineView()
+        self.browser.load(QtCore.QUrl(url_app_doc))
+
+        widget = QWidget()
+        w.setCentralWidget(widget)
+        lay = QVBoxLayout(widget)
+        lay.addWidget(self.browser)
+
+        lay.addWidget(self.btn_back)
         self.btn_back.clicked.connect(self.menu)
 
     def run_btn_tech_doc(self):
-        uic.loadUi("tech_doc.ui", self)
+        w = uic.loadUi("docs.ui", self)
         self.setWindowTitle("Документация")
         self.setWindowIcon(QIcon("icon.ico"))
+
+        url_app_doc = "https://github.com/shersh-is/IoT-SecurityPoint/blob/main/docs/technical_doc.md"
+        self.browser = QWebEngineView()
+        self.browser.load(QtCore.QUrl(url_app_doc))
+
+        widget = QWidget()
+        w.setCentralWidget(widget)
+        lay = QVBoxLayout(widget)
+        lay.addWidget(self.browser)
+
+        lay.addWidget(self.btn_back)
         self.btn_back.clicked.connect(self.menu)
 
 
