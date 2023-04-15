@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IoT_SecurityPoint</class>
+ <widget class="QMainWindow" name="IoT_SecurityPoint">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="btn_set">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>230</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Параметры</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="header_name">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>621</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(85, 85, 85);
+border-color: rgb(85, 85, 85);
+background-color: rgb(222, 222, 222);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>IoT SecurityPoint</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_db">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>180</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>База Уязвимостей</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_cfu">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>130</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Наличие Обновлений</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_ad">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>80</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Все Устройства</string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tab_menu">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>451</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(248, 248, 248);
+color: rgb(85, 85, 85);
+border-color: rgb(233, 233, 233);</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_notif">
+     <attribute name="title">
+      <string>Уведомления</string>
+     </attribute>
+     <widget class="QTableWidget" name="table_hotif">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>451</width>
+        <height>361</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>6</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>7</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>8</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>9</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>11</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>Уведомление</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Дата</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Время</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>Новая сессия</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>16:34</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>Добавлено новое устройство</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>85</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string>16:52</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>Устройство удалено</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>170</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string>16:55</string>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>Конец сессии</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="3" column="2">
+       <property name="text">
+        <string>17:01</string>
+       </property>
+      </item>
+      <item row="4" column="0">
+       <property name="text">
+        <string>Новая сессия</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="4" column="1">
+       <property name="text">
+        <string>16.04.2023</string>
+       </property>
+      </item>
+      <item row="4" column="2">
+       <property name="text">
+        <string>13:26</string>
+       </property>
+      </item>
+      <item row="5" column="0">
+       <property name="text">
+        <string>Настройка сети</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>85</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="5" column="1">
+       <property name="text">
+        <string>16.04.2023</string>
+       </property>
+      </item>
+      <item row="5" column="2">
+       <property name="text">
+        <string>13:32</string>
+       </property>
+      </item>
+      <item row="6" column="0">
+       <property name="text">
+        <string>Конец сессии</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="6" column="1">
+       <property name="text">
+        <string>16.04.2023</string>
+       </property>
+      </item>
+      <item row="6" column="2">
+       <property name="text">
+        <string>15:43</string>
+       </property>
+      </item>
+      <item row="7" column="0">
+       <property name="text">
+        <string>Новая сессия</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="7" column="1">
+       <property name="text">
+        <string>17.04.2023</string>
+       </property>
+      </item>
+      <item row="7" column="2">
+       <property name="text">
+        <string>8:06</string>
+       </property>
+      </item>
+      <item row="8" column="0">
+       <property name="text">
+        <string>Конец сессии</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="8" column="1">
+       <property name="text">
+        <string>17.04.2023</string>
+       </property>
+      </item>
+      <item row="8" column="2">
+       <property name="text">
+        <string>8:23</string>
+       </property>
+      </item>
+      <item row="9" column="0">
+       <property name="text">
+        <string>Новая сессия</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="9" column="1">
+       <property name="text">
+        <string>19.04.2023</string>
+       </property>
+      </item>
+      <item row="9" column="2">
+       <property name="text">
+        <string>14:27</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_upd">
+     <attribute name="title">
+      <string>Обновления</string>
+     </attribute>
+     <widget class="QTableWidget" name="table_upd">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>451</width>
+        <height>361</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>6</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>7</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>8</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>9</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>11</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>Событие</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Дата</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Время</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>Устройству &quot;Робот-пылесос&quot; доступно обновление</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>17:54</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>Обновление устройства</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>170</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string>15.04.2023</string>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string>17:57</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>Найдено новое обновление!</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string>18.04.2023</string>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string>16:45</string>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>База обновлена до последней версии</string>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>170</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string>18.04.2023</string>
+       </property>
+      </item>
+      <item row="3" column="2">
+       <property name="text">
+        <string>16:48</string>
+       </property>
+      </item>
+      <item row="4" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
