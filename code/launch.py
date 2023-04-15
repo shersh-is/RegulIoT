@@ -87,14 +87,13 @@ class Application(QMainWindow):
         self.setWindowTitle("Наличие обновлений")
         self.setWindowIcon(QIcon("icon.ico"))
 
-        """global main_date
+        global main_date
         update = False
         date = feedparser.parse("https://www.cve.org/AllResources/CveServices#cve-json-5").updated
         if date != main_date:
             update = True
-            main_date = date"""
-
-        update = False
+            main_date = date
+        
         if update:
             upd_message = QMessageBox()
             upd_message.setWindowTitle("Завершено")
@@ -107,7 +106,7 @@ class Application(QMainWindow):
             answ = upd_message.exec_()  # 16384 => yes / 65536 => no
             # downloading new database for last and current years
             if answ == 16384:
-                """url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
+                url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
                 wget.download(url)  # => cvelistV5-main.zip
                 with zp("cvelistV5-main.zip") as zf:
                     zf.extractall("./")
@@ -123,7 +122,7 @@ class Application(QMainWindow):
                             for file in os.listdir(f"./cvelistV5-main/cves/{by_year}/{folders}"):
                                 shutil.copy(f"./cvelistV5-main/cves/{by_year}/{folders}/{file}", "database")
                     else:
-                        continue"""
+                        continue
                 uic.loadUi("check_for_updates_new.ui", self)
                 self.setWindowTitle("Наличие обновлений")
                 self.setWindowIcon(QIcon("icon.ico"))
@@ -149,7 +148,7 @@ class Application(QMainWindow):
     def run_btn_scan_net(self):
         # gets IP address
         # IP range of the network from 192.168.0.0 to 192.168.0.255
-        """ip = socket.gethostbyname(socket.gethostname())
+        ip = socket.gethostbyname(socket.gethostname())
 
         # scans and founds all devices in network
         hosts = []
@@ -173,7 +172,7 @@ class Application(QMainWindow):
             item_adr = QTableWidgetItem(address)
             self.table_ad.setItem(i, 0, item_name)
             self.table_ad.setItem(i, 1, item_mac)
-            self.table_ad.setItem(i, 2, item_adr)"""
+            self.table_ad.setItem(i, 2, item_adr)
 
     def run_btn_check_device(self):
         pass
