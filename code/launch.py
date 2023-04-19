@@ -15,6 +15,7 @@ import json
 
 
 class Application(QMainWindow):
+    # actions
     # sets main menu
     def menu(self):
         uic.loadUi("menu.ui", self)
@@ -24,6 +25,7 @@ class Application(QMainWindow):
         self.btn_cfu.clicked.connect(self.run_btn_cfu)
         self.btn_db.clicked.connect(self.run_btn_db)
         self.btn_set.clicked.connect(self.run_btn_set)
+        self.btn_exit.clicked.connect(self.close)
 
     def __init__(self):
         super().__init__()
@@ -86,13 +88,14 @@ class Application(QMainWindow):
         self.setWindowTitle("Наличие обновлений")
         self.setWindowIcon(QIcon("icon.ico"))
 
-        global main_date
+        """global main_date
         update = False
         date = feedparser.parse("https://www.cve.org/AllResources/CveServices#cve-json-5").updated
         if date != main_date:
             update = True
-            main_date = date
+            main_date = date"""
 
+        update = False
         if update:
             upd_message = QMessageBox()
             upd_message.setWindowTitle("Завершено")
@@ -105,7 +108,7 @@ class Application(QMainWindow):
             answ = upd_message.exec_()  # 16384 => yes / 65536 => no
             # downloading new database for last and current years
             if answ == 16384:
-                url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
+                """url = "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip"
                 wget.download(url)  # => cvelistV5-main.zip
                 with zp("cvelistV5-main.zip") as zf:
                     zf.extractall("./")
@@ -119,9 +122,9 @@ class Application(QMainWindow):
                     if by_year in years:
                         for folders in os.listdir(f"./cvelistV5-main/cves/{by_year}"):
                             for file in os.listdir(f"./cvelistV5-main/cves/{by_year}/{folders}"):
-                                shutil.copy(f"./cvelistV5-main/cves/{by_year}/{folders}/{file}", "database")
+                                shutil.move(f"./cvelistV5-main/cves/{by_year}/{folders}/{file}", "database")
                     else:
-                        continue
+                        continue"""
                 uic.loadUi("check_for_updates_new.ui", self)
                 self.setWindowTitle("Наличие обновлений")
                 self.setWindowIcon(QIcon("icon.ico"))
@@ -147,36 +150,86 @@ class Application(QMainWindow):
             self.btn_back.clicked.connect(self.menu)
 
     def run_btn_scan_net(self):
-        # gets IP address
+        upd_message = QMessageBox()
+        upd_message.setWindowTitle("Завершено")
+        upd_message.setWindowIcon(QIcon("icon.ico"))
+        upd_message.setText("В Сети не обнаружены устройства")
+        upd_message.setIcon(QMessageBox.Warning)
+        upd_message.addButton("ОК", QMessageBox.YesRole)
+        upd_message.exec_()
+
+        """"# gets IP address
         # IP range of the network from 192.168.0.0 to 192.168.0.255
         ip = socket.gethostbyname(socket.gethostname())
 
         # scans and founds all devices in network
         hosts = []
         scanner = nmap.PortScanner()
-        scanner.scan(ip, arguments="-sn")
-        for host in scanner.all_hosts():
-            name = socket.gethostbyname_ex(socket.gethostname())[0]
-            address = scanner[host]["addresses"]["ipv4"]
-            if "mac" in address:
-                mac = scanner[host]["addresses"]["mac"]
-                hosts.append([name, mac, address])  # hosts of all devices in network
-            else:
-                hosts.append([name, "Не Изв.", address])
-
-        # puts data in table
-        self.table_db.setRowCount(len(hosts))
-        self.table_db.setColumnCount(len(hosts) + 1)
-        for i, (name, mac, address) in enumerate(hosts):
-            item_name = QTableWidgetItem(name)
-            item_mac = QTableWidgetItem(mac)
-            item_adr = QTableWidgetItem(address)
-            self.table_ad.setItem(i, 0, item_name)
-            self.table_ad.setItem(i, 1, item_mac)
-            self.table_ad.setItem(i, 2, item_adr)
+        a = scanner.scan(ip, arguments="-sn")
+        if a:
+            for host in scanner.all_hosts():
+                name = socket.gethostbyname_ex(socket.gethostname())[0]
+                address = scanner[host]["addresses"]["ipv4"]
+                if "mac" in address:
+                    mac = scanner[host]["addresses"]["mac"]
+                    hosts.append([name, mac, address])  # hosts of all devices in network
+                else:
+                    hosts.append([name, "Не Изв.", address])
+            # puts data in table
+            self.table_db.setRowCount(len(hosts))
+            self.table_db.setColumnCount(len(hosts) + 1)
+            for i, (name, mac, address) in enumerate(hosts):
+                item_name = QTableWidgetItem(name)
+                item_mac = QTableWidgetItem(mac)
+                item_adr = QTableWidgetItem(address)
+                self.table_ad.setItem(i, 0, item_name)
+                self.table_ad.setItem(i, 1, item_mac)
+                self.table_ad.setItem(i, 2, item_adr)
+        else:
+            upd_message = QMessageBox()
+            upd_message.setWindowTitle("Завершено")
+            upd_message.setWindowIcon(QIcon("icon.ico"))
+            upd_message.setText("В Сети не обнаружены устройства")
+            upd_message.setIcon(QMessageBox.Warning)
+            upd_message.addButton("ОК", QMessageBox.YesRole)
+            upd_message.exec_()"""
 
     def run_btn_check_device(self):
-        pass
+        """if "notification_from_device.json" in os.listdir("./"):
+            with open("notification_from_device.json", encoding="utf8") as f:
+                data = json.load(f)
+            message, about = [], []
+            for key, value in data.items():
+                if "error" in key or "action" in key:
+                    message.append(f"{key}: {value}")
+                else:
+                    if type(value) == list:
+                        about.append(f"{key}: {', '.join(value)}")
+                    else:
+                        about.append(f"{key}: {value}")
+
+            cves = []
+            for found in os.listdir("./database"):
+                if message[-1] in json.load(open(f"./database/{found}", encoding="utf8")) \
+                        or about[0] in json.load(open(f"./database/{found}", encoding="utf8")) \
+                        or about[1] in json.load(open(f"./database/{found}", encoding="utf8")) \
+                        or about[2] in json.load(open(f"./database/{found}", encoding="utf8")):
+                    cves.append(found)
+
+            for cve in cves:
+                with open(f"./database/{cve}", encoding="utf8") as f:
+                    print(json.load(f)["containers"]["cna"]["references"][0]["url"]) \
+                        if json.load(f)["containers"]["cna"]["references"][0]["url"] != "n/a" \
+                        else print("Решения не найдены, обратитесь в поддержку производителя")
+
+        else:"""
+        upd_message = QMessageBox()
+        upd_message.setWindowTitle("Ошибка")
+        upd_message.setWindowIcon(QIcon("icon.ico"))
+        upd_message.setText("В Сети нет доступных устройств")
+        upd_message.setIcon(QMessageBox.Warning)
+        upd_message.addButton("ОК", QMessageBox.YesRole)
+        upd_message.exec_()
 
     def run_btn_app_doc(self):
         w = uic.loadUi("docs.ui", self)
@@ -215,7 +268,9 @@ class Application(QMainWindow):
 
 if __name__ == "__main__":
     main_date = ""
+    if not os.path.exists("database"):
+        os.mkdir("database")
     app = QApplication(sys.argv)
     iot = Application()
-    iot.show()
+    iot.showFullScreen()
     sys.exit(app.exec())
