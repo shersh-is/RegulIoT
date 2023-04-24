@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtCore, uic
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QMessageBox, QTableWidgetItem, QVBoxLayout
-from PyQt5.QtWebKitWidgets import QWebView
+from PyQt5.QtWebKitWidgets import QWebView  # ! WebKit is used on Raspberry Pi. Change it on WebEngine
 import feedparser
 import wget
 from datetime import datetime as dt
@@ -236,7 +236,7 @@ class Application(QMainWindow):
         self.setWindowIcon(QIcon("icon.ico"))
 
         url_app_doc = "https://github.com/shersh-is/IoT-SecurityPoint/blob/main/docs/application_doc.md"
-        self.browser = QWebView()
+        self.browser = QWebView()  # ! WebView is used on Raspberry Pi. Change it on WebEngineView
         self.browser.load(QtCore.QUrl(url_app_doc))
 
         widget = QWidget()
@@ -253,7 +253,7 @@ class Application(QMainWindow):
         self.setWindowIcon(QIcon("icon.ico"))
 
         url_app_doc = "https://github.com/shersh-is/IoT-SecurityPoint/blob/main/docs/technical_doc.md"
-        self.browser = QWebView()
+        self.browser = QWebView()  # ! WebView is used on Raspberry Pi. Change it on WebEngineView
         self.browser.load(QtCore.QUrl(url_app_doc))
 
         widget = QWidget()
