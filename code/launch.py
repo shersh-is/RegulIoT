@@ -1,3 +1,6 @@
+# Check visual interface with launch.py without wasting time
+# Check efficiency with main.py
+
 import sys
 from PyQt5 import QtCore, uic
 from PyQt5.QtGui import QIcon
