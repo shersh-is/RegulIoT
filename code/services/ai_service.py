@@ -9,18 +9,47 @@ class AIService:
 
     def analyze(self, device):
         vulns = self.cve_service.search(
-            device.vendor, device.product, device.firmware
+            device.vendor,
+            device.product,
+            device.firmware
         )
 
-        features = [[len(vulns)]]
-        risk = self.model.predict_proba(features)[0][1]
+        vendor_len = len(device.vendor)
+        product_len = len(device.product)
 
-        severity = "CRITICAL" if risk > 0.8 else "HIGH" if risk > 0.5 else "LOW"
+        cvss_scores = [
+            getattr(v, "severity_score", 0)
+            for v in vulns
+            if hasattr(v, "severity_score")
+        ]
+        max_cvss = max(cvss_scores) if cvss_scores else 0.0
+        cvss_norm = max_cvss / 10.0
+
+        features = [[
+            vendor_len,
+            product_len,
+            cvss_norm
+        ]]
+
+        risk_prob = self.model.predict_proba(features)[0][1]
+
+        if risk_prob > 0.8:
+            severity = "CRITICAL"
+            recommendation = "Deactivate device or isolate network segment"
+        elif risk_prob > 0.5:
+            severity = "HIGH"
+            recommendation = "Update firmware immediately"
+        elif risk_prob > 0.2:
+            severity = "MEDIUM"
+            recommendation = "Monitor device and schedule update"
+        else:
+            severity = "LOW"
+            recommendation = "No action required"
 
         return AIResult(
-            device.ip,
-            risk,
-            severity,
-            vulns,
-            "Update firmware" if severity != "LOW" else "No action required"
+            device_ip=device.ip,
+            risk_score=risk_prob,
+            severity=severity,
+            vulnerabilities=vulns,
+            recommendation=recommendation
         )
