@@ -17,6 +17,11 @@ class CVERepository:
                 severity=cna.get("metrics", [{}])[0]
                          .get("cvssV3_1", {})
                          .get("baseSeverity"),
+                severity_score = (
+                        cna.get("metrics", [{}])[0]
+                        .get("cvssV3_1", {})
+                        .get("baseScore", 0.0)
+                    ),
                 references=[r["url"] for r in cna.get("references", [])]
             ))
         return vulns
