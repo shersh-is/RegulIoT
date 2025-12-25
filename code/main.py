@@ -5,6 +5,7 @@ from services.cve_service import CVEService
 from services.network_service import NetworkService
 from services.ai_service import AIService
 from services.notification_service import NotificationService
+from services.application_service import ApplicationService
 from config import BASE_DIR
 from ui_app import MainWindow
 
@@ -23,13 +24,15 @@ def main():
 
     notification_service = NotificationService()
 
-    app = QApplication(sys.argv)
-    window = MainWindow(
-        cve_service,
-        network_service,
-        ai_service,
-        notification_service
+    application_service = ApplicationService(
+        network_service=network_service,
+        cve_service=cve_service,
+        ai_service=ai_service,
+        notification_service=notification_service
     )
+
+    app = QApplication(sys.argv)
+    window =window = MainWindow(application_service)
     window.show()
 
     sys.exit(app.exec())
@@ -37,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
